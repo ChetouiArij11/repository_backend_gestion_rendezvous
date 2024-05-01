@@ -28,17 +28,17 @@ pipeline {
             steps {
                 script {
                     // Construisez l'image Docker
-                    bat "docker build -t back_rendezvous:${BUILD_ID} ."
-                    bat "docker tag back_rendezvous:${BUILD_ID} arijchetoui1/back_rendezvous:${BUILD_ID}"
+                    bat "docker build -t back_rendezvous:latest ."
+                    bat "docker tag back_rendezvous:latest arijchetoui1/back_rendezvous:latest"
                 }
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Deploy with docker-compose ') {
             steps {
                 script {
-                    // Exécutez le conteneur Docker en utilisant l'image construite
-                    bat "docker run -d -p 3003:3003 --name back_rendezvous_container_${BUILD_ID} arijchetoui1/back_rendezvous:${BUILD_ID}"
+                    // Deploy with docker-compose
+                    bat "docker-compose up"
                 }
             }
         }
