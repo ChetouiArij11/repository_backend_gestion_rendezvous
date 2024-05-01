@@ -24,43 +24,23 @@ pipeline {
             }
         }
 
-        stage('Build & Tag Docker Image') {
+        stage('Build & rename Docker Image') {
             steps {
                 script {
-                    // Construire l'image Docker
-                    bat "docker build -t arijchetoui1/back_rendezvous:latest ."
-                    // Tag l'image Docker
-                    bat "docker tag arijchetoui1/back_rendezvous:latest arijchetoui1/back_rendezvous:latest"
+                    // Construisez l'image Docker
+                    bat "docker build -t back_rendezvous:${BUILD_ID} ."
+                    bat "docker tag back_rendezvous:${BUILD_ID} arijchetoui1/back_rendezvous:${BUILD_ID}"
                 }
             }
         }
 
-        stage('Deploy Docker image') {
+        stage('Run Docker Container') {
             steps {
                 script {
-                    // Push Docker image to Docker Hub
-                     docker.withRegistry('https://index.docker.io/v1/', '14') {
-                        // Push both the latest and tagged images
-                        docker.image('arijchetoui1/back_rendezvous:latest').push()
-                    }
+                    // Exécutez le conteneur Docker en utilisant l'image construite
+                    bat "docker run -d -p 3003:3003 --name back_rendezvous_container_${BUILD_ID} arijchetoui1/back_rendezvous:${BUILD_ID}"
                 }
             }
         }
-        stage('Deploy with docker-compose ') {
-            steps {
-                script {
-                    // Deploy with docker-compose
-                    bat "docker-compose up"
-                }
-            }
-        }
-        //stage('Deploy to Kubernetes') {
-            //steps {
-                //script {
-                    // Déployer les ressources Kubernetes
-                    //bat "kubectl apply -f deployment.yaml"
-                //}
-            //}
-        //}
     }
 }
