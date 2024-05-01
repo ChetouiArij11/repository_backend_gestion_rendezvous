@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     // Déployer les ressources Kubernetes
-                    bat "kubectl apply -f kubernetes/deployment.yaml"
+                    bat "kubectl apply -f deployment.yaml"
                 }
             }
         }
