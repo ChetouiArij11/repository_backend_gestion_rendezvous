@@ -33,21 +33,6 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    bat "docker-compose up --build"
-                }
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    // Exécutez le conteneur Docker en utilisant l'image construite
-                    bat "docker run -d -p 3003:3003 --name back_rendezvous_container_latest arijchetoui1/back_rendezvous:latest"
-                }
-            }
-        }
         stage('Deploy Docker image') {
             steps {
                 script {
@@ -59,5 +44,13 @@ pipeline {
                 }
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    bat "docker-compose up --build"
+                }
+            }
+        }
+
     }
 }
