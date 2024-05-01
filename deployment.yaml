@@ -1,0 +1,44 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-rendezvous-deployment
+  labels:
+    app: backend-rendezvous
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-rendezvous
+  template:
+    metadata:
+      labels:
+        app: backend-rendezvous
+    spec:
+      containers:
+        - name: backend-rendezvous
+          image: arijchetoui1/back_rendezvous:latest # Utilisez la version de l'image souhaitée
+          ports:
+            - containerPort: 3003
+          env:
+            - name: MYSQL_HOST
+              value: "db" # Utilisez la valeur spécifiée dans le Service pour le déploiement de la base de données
+            - name: MYSQL_USER
+              value: "root" # Utilisez l'utilisateur spécifié dans votre base de données MySQL
+            - name: MYSQL_PASSWORD
+              value: "root" # Utilisez le mot de passe spécifié dans votre base de données MySQL
+            - name: MYSQL_DATABASE
+              value: "medirendez" # Utilisez le nom de votre base de données MySQL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-rendezvous-service
+spec:
+  selector:
+    app: backend-rendezvous
+  ports:
+    - protocol: TCP
+      port: 3003
+      targetPort: 3003
+  type: ClusterIP

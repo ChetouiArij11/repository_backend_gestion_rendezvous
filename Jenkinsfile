@@ -24,15 +24,17 @@ pipeline {
             }
         }
 
-        stage('Build & rename Docker Image') {
+        stage('Build & Tag Docker Image') {
             steps {
                 script {
-                    // Construisez l'image Docker
-                    bat "docker build -t back_rendezvous:latest ."
-                    bat "docker tag back_rendezvous:latest arijchetoui1/back_rendezvous:latest"
+                    // Construire l'image Docker
+                    bat "docker build -t arijchetoui1/back_rendezvous:latest ."
+                    // Tag l'image Docker
+                    bat "docker tag arijchetoui1/back_rendezvous:latest arijchetoui1/back_rendezvous:latest"
                 }
             }
         }
+
         stage('Deploy Docker image') {
             steps {
                 script {
@@ -44,13 +46,14 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Image') {
+
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    bat "docker-compose up --build"
+                    // Déployer les ressources Kubernetes
+                    bat "kubectl apply -f kubernetes/deployment.yaml"
                 }
             }
         }
-
     }
 }
