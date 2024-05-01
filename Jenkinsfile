@@ -46,14 +46,21 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy to Kubernetes') {
+        stage('Deploy with docker-compose ') {
             steps {
                 script {
-                    // Déployer les ressources Kubernetes
-                    bat "kubectl apply -f deployment.yaml"
+                    // Deploy with docker-compose
+                    bat "docker-compose up"
                 }
             }
         }
+        //stage('Deploy to Kubernetes') {
+            //steps {
+                //script {
+                    // Déployer les ressources Kubernetes
+                    //bat "kubectl apply -f deployment.yaml"
+                //}
+            //}
+        //}
     }
 }
