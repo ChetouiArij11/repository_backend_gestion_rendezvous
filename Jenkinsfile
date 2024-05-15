@@ -42,6 +42,18 @@ pipeline {
             }
         }
 
+        stage('Deploy Docker image') {
+            steps {
+                script {
+                    // Push Docker image to Docker Hub
+                     docker.withRegistry('https://index.docker.io/v1/', '14') {
+                        // Push both the latest and tagged images
+                        docker.image('arijchetoui1/back_rendezvous:latest').push()
+                    }
+                }
+            }
+        }
+
         stage('Deploy with docker-compose ') {
             steps {
                 script {
