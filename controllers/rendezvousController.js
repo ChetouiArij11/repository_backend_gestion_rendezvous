@@ -1,6 +1,6 @@
 const { getRepository } = require("typeorm");
 const Rendezvous = require("../models/Rendezvous");
-
+const express = require('express');
 exports.getAllRendezvous = async (req, res) => {
   try {
     const rendezvousRepository = getRepository(Rendezvous);

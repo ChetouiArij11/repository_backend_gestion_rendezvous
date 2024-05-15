@@ -6,12 +6,13 @@ async function connectDatabase() {
     await createConnection({
       type: "mysql",
       host: process.env.MYSQL_HOST || "db",
-      port: parseInt(process.env.MYSQL_PORT) || 3306, // Convertir en entier
+      //host: process.env.MYSQL_HOST || "localhost",
+      port: process.env.MYSQL_PORT || 3306,
       username: process.env.MYSQL_USER || "root",
       password: process.env.MYSQL_PASSWORD || "root",
-      database: process.env.MYSQL_DATABASE || "medirendez",
-      entities: [__dirname + "/models/*.js"], // Utiliser le chemin absolu pour les entités
+      entities: ["models/*.js"],
       synchronize: true,
+      database: process.env.MYSQL_DATABASE || "medirendez",
     });
     console.log("Connected to the database");
   } catch (error) {

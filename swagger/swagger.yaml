@@ -1,25 +1,25 @@
 openapi: 3.0.0
 info:
-  title: API de gestion des patients
+  title: API de gestion des rendezvous
   version: 1.0.0
-  description: API permettant de gérer les patients d'une clinique médicale.
+  description: API permettant de gérer les rendezvous d'une clinique médicale.
 
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3003
     description: Serveur local
 
 paths:
-  /patients:
+  /rendezvous:
     get:
-      summary: Récupérer tous les patients
-      description: Récupère tous les patients de la base de données.
+      summary: Récupérer tous les rendezvous
+      description: Récupère tous les rendezvous de la base de données.
       responses:
         '200':
-          description: Succès de la récupération des patients
+          description: Succès de la récupération des rendezvous
         '500':
           description: Erreur serveur
 
-  /patients/{id}:
+  /rendezvous/{id}:
     get:
       summary: Récupérer un patient par ID
       description: Récupère les détails d'un patient en fonction de son ID.
@@ -102,7 +102,7 @@ paths:
         '500':
           description: Erreur serveur
 
-  /patients/ajout:
+  /rendezvous/ajout:
     post:
       summary: Ajouter un nouveau patient
       description: Ajoute un nouveau patient à la base de données.
@@ -167,7 +167,7 @@ paths:
               example:
                 message: "Erreur interne du serveur."
 
-  /patients/search/patient/{cin}:
+  /rendezvous/search/patient/{cin}:
     get:
       summary: Rechercher un patient par CIN
       parameters:

@@ -3,29 +3,31 @@ const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger/swagger.yaml");
-const connectDatabase = require("./config/db");
+
 require("dotenv").config();
+const connectDatabase = require("./config/db");
+const Rendezvous = require("./models/Rendezvous");
+
+// Database connection
+connectDatabase([Rendezvous]);
 
 // Create Express app
 const app = express();
 
-// Middleware pour analyser le corps des requêtes HTTP
+// Middleware to parse request bodies
 app.use(bodyParser.json());
-
-// Database connection
-connectDatabase();
 
 // Swagger documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Middleware pour gérer les requêtes liées aux rendez-vous
+// Middleware for handling rendezvous requests
 const RendezvousRoutes = require("./Routes/rendezvousRoutes");
 app.use("/rendezvous", RendezvousRoutes);
 
-// Port d'écoute du serveur
-const PORT = process.env.PORT || 3006;
+// Server port
+const PORT = process.env.PORT || 3003;
 
-// Démarrage du serveur
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

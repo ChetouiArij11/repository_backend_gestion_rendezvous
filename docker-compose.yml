@@ -12,7 +12,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - "3006:3006"
+      - "3003:3003"
     networks:
       - crud_backend_gestion_rendezvous_default
 
@@ -21,7 +21,7 @@ services:
     container_name: db-container-rendezvous_jenkins
     restart: always
     environment:
-      MYSQL_DATABASE: gestion_rendezvous
+      MYSQL_DATABASE: medirendez
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
     command: --init-file /docker-entrypoint-initdb.d/init.sql

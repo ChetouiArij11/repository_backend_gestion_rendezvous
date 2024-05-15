@@ -47,11 +47,6 @@ const FicheMedicale = new EntitySchema({
       target: "Medecin",
       joinColumn: { name: "medecin_id" },
     },
-    rendezvous: {
-      type: "many-to-one",
-      target: "Rendezvous",
-      joinColumn: { name: "rendezvous_id" },
-    },
     dossierMedical: {
       type: "many-to-one",
       target: "DossierMedical",
