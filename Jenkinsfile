@@ -10,42 +10,52 @@ pipeline {
         stage('Install Node.js and npm') {
             steps {
                 script {
+                    // Utilisation de l'outil Node.js installé sur Jenkins
                     def nodejs = tool name: 'NODEJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
                     env.PATH = "${nodejs}/bin:${env.PATH}"
                 }
             }
         }
-        stage('Install express , Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 script {
-                 bat "npm install express"
-                 bat "npm install"
+                    // Installation des dépendances du projet, y compris Express
+                    bat "npm install express"
+                    bat "npm install"
                 }
             }
         }
-
         stage('Checkout') {
             steps {
                 script {
+                    // Récupération du code depuis le référentiel source
                     checkout scm
                 }
             }
         }
-
-        stage('Build & rename Docker Image') {
+        stage('Build & tag Docker Image') {
             steps {
                 script {
-                    // Construisez l'image Docker
+                    // Construction de l'image Docker et ajout d'un tag
                     bat "docker build -t back_rendezvous:latest ."
                     bat "docker tag back_rendezvous:latest arijchetoui1/back_rendezvous:latest"
                 }
             }
         }
-
+        stage('Deploy Docker image to Docker Hub') {
+            steps {
+                script {
+                    // Déploiement de l'image Docker sur Docker Hub
+                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKERHUB_CREDENTIALS') {
+                        docker.image('arijchetoui1/back_rendezvous:latest').push()
+                    }
+                }
+            }
+        }
         stage('Deploy with docker-compose ') {
             steps {
                 script {
-                    // Deploy with docker-compose
+                    // Déploiement avec docker-compose
                     bat "docker-compose up"
                 }
             }
