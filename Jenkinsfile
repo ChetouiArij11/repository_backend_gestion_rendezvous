@@ -15,6 +15,14 @@ pipeline {
                 }
             }
         }
+        stage('Install express , Dependencies') {
+            steps {
+                script {
+                 bat "npm install express"
+                 bat "npm install"
+                }
+            }
+        }
 
         stage('Checkout') {
             steps {
