@@ -9,6 +9,14 @@
 
 ![alt text](image-2.png)
 
+
+------------------------------
+### deploy docker-compose 
+
+![alt text](image-10.png)
+
+------------------------------
+
 # kubernet deploy image docker 
 
 ![alt text](image-3.png)
@@ -54,12 +62,3 @@ MYSQL_DATABASE=medirendez
 
 
 
-
-
-
-
-![alt text](image.png)
-
-
-
-![alt text](image-1.png)
