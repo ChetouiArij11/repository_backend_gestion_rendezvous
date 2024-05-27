@@ -62,5 +62,13 @@ pipeline {
                 }
             }
         }
+        //   stage('Deploy with kubernet ') {
+        //     steps {
+        //         script {
+        //             
+        //             bat "kubectl apply -f deployment.yaml"
+        //         }
+        //     }
+        // }
     }
 }
