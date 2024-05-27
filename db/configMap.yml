@@ -145,17 +145,21 @@ data:
       `id` int(11) NOT NULL,
       `id_patient` int(11) NOT NULL,
       `id_medecin` int(11) NOT NULL,
+      `nom_patient` varchar(255) DEFAULT NULL,
+      `num_telephone_patient` varchar(15) DEFAULT NULL,
       `date_heure` datetime NOT NULL,
-      `motif` text NOT NULL
+      `motif` text NOT,
+      `statut` varchar(20) NOT NULL,
+      `patient_email` varchar(255) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
     --
     -- Déchargement des données de la table `rendezvous`
     --
 
-    INSERT INTO `rendezvous` (`id`, `id_patient`, `id_medecin`, `date_heure`, `motif`) VALUES
-    (2, 1296866, 6, '2024-06-15 14:30:00', 'Consultation annuelle'),
-    (3, 1296863, 4, '2024-06-20 10:00:00', 'Suivi post-opératoire');
+    INSERT INTO `rendezvous` (`id`, `patient_id`, `medecin_id`, `nom_patient`, `num_telephone_patient`, `date_heure`, `motif`, `statut`, `patient_email`) VALUES
+    (1296948, 1296863, 27, 'karim', '98741258', '2024-05-14 22:13:00', '78541.2', 'Nouveau', 'arijchetoui1@gmail.com'),
+    (1296950, 1296863, 27, 'ammal', '78965412', '2024-05-26 16:15:00', 'qqq', 'Nouveau', 'k.chet@gmail.com');
 
     -- --------------------------------------------------------
 
