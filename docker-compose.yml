@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nodejs-api-container_rendezvous
+    container_name: nodejs-api-container_rendezvous_auto
     depends_on:
       - db
     volumes:
@@ -18,7 +18,7 @@ services:
 
   db:
     image: mysql
-    container_name: db-container-rendezvous_jenkins
+    container_name: db-container-rendezvous_jenkins_auto
     restart: always
     environment:
       MYSQL_DATABASE: medirendez

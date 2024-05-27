@@ -62,11 +62,22 @@ pipeline {
                 }
             }
         }
-        //   stage('Deploy with kubernet ') {
+        //   stage('Deploy with docker-compose ') {
         //     steps {
         //         script {
-        //             
-        //             bat "kubectl apply -f deployment.yaml"
+
+        //             bat """
+        //             kubectl get namespace gestion-rendezvous || kubectl create namespace gestion-rendezvous
+        //             """
+
+
+        //             bat """
+        //             kubectl apply -f db/configmap.yaml -n gestion-rendezvous
+        //             kubectl apply -f db/mysqldeployment.yaml -n gestion-rendezvous
+        //             kubectl apply -f db/persistentvolume.yaml -n gestion-rendezvous
+        //             kubectl apply -f deployment.yaml -n gestion-rendezvous
+        //             """
+
         //         }
         //     }
         // }
