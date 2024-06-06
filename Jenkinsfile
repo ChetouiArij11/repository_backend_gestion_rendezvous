@@ -47,6 +47,7 @@ pipeline {
                 }
             }
         }
+
         // stage('Deploy with docker-compose ') {
         //     steps {
         //         script {
@@ -66,9 +67,9 @@ pipeline {
                     kubectl cluster-info
                     kubectl get nodes
                     kubectl get namespace gestion-rendezvous || kubectl create namespace gestion-rendezvous
-                    kubectl apply -f db/configmap.yml -n gestion-rendezvous
-                    kubectl apply -f db/mysqldeployment.yml -n gestion-rendezvous
-                    kubectl apply -f db/persistentvolume.yml -n gestion-rendezvous
+                    kubectl apply -f db/configMap.yml -n gestion-rendezvous
+                    kubectl apply -f db/mysqldep.yml -n gestion-rendezvous
+                    kubectl apply -f db/persistant.yaml -n gestion-rendezvous
                     kubectl apply -f deployment.yaml -n gestion-rendezvous
                     '''
                 }
