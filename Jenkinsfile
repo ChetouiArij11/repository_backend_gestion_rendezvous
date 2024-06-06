@@ -2,10 +2,9 @@ pipeline {
     agent any
     environment {
         DOCKER_PATH = "C:\\Program Files\\Docker\\cli-plugins"
-        PATH = "${DOCKER_PATH};${env.PATH}"
         NODEJS_PATH = "C:\\Program Files (x86)\\nodejs"
-        PATH = "${NODEJS_PATH};${env.PATH}"
-        KUBECONFIG = 'C:\\Program Files\\Jenkins\\.kube\\config' // Mettez à jour ce chemin avec le chemin réel
+        KUBECONFIG = 'C:\\Program Files\\Jenkins\\.kube\\config' 
+        PATH = "${DOCKER_PATH};${env.PATH}" 
     }
     stages {
         stage('Install Node.js and npm') {
