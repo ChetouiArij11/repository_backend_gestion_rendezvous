@@ -66,9 +66,9 @@ pipeline {
                     kubectl cluster-info
                     kubectl get nodes
                     kubectl get namespace gestion-rendezvous || kubectl create namespace gestion-rendezvous
-                    kubectl apply -f db/configmap.yaml -n gestion-rendezvous
-                    kubectl apply -f db/mysqldeployment.yaml -n gestion-rendezvous
-                    kubectl apply -f db/persistentvolume.yaml -n gestion-rendezvous
+                    kubectl apply -f db/configmap.yml -n gestion-rendezvous
+                    kubectl apply -f db/mysqldeployment.yml -n gestion-rendezvous
+                    kubectl apply -f db/persistentvolume.yml -n gestion-rendezvous
                     kubectl apply -f deployment.yaml -n gestion-rendezvous
                     '''
                 }
