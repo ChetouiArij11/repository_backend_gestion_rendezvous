@@ -57,7 +57,7 @@ pipeline {
         // stage('Deploy with docker-compose ') {
         //     steps {
         //         script {
-        //             // Deploy with docker-compose
+        
         //             bat "docker-compose up"
         //         }
         //     }
