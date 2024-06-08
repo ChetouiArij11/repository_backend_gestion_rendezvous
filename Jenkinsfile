@@ -52,7 +52,7 @@ pipeline {
         stage('SonarQube test') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube Test') { // Assurez-vous que ce nom correspond à celui configuré dans Jenkins
+                    withSonarQubeEnv('SonarQube Test') { 
                         bat 'npm run sonarqube'
                     }
                 }
