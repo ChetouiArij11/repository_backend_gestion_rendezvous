@@ -4,7 +4,8 @@ pipeline {
         DOCKER_PATH = "C:\\Program Files\\Docker\\cli-plugins"
         NODEJS_PATH = "C:\\Program Files (x86)\\nodejs"
         KUBECONFIG = 'C:\\Program Files\\Jenkins\\.kube\\config' 
-        PATH = "${DOCKER_PATH};${env.PATH}" 
+        PATH = "${DOCKER_PATH};${env.PATH}"
+        CHROME_BIN = '/usr/bin/google-chrome'
     }
     stages {
         stage('Install Node.js and npm') {
@@ -43,6 +44,16 @@ pipeline {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', '14') {
                         docker.image('arijchetoui1/back_rendezvous:latest').push()
+                    }
+                }
+            }
+        }
+
+        stage('SonarQube test') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube Test') { // Assurez-vous que ce nom correspond à celui configuré dans Jenkins
+                        bat 'npm run sonarqube'
                     }
                 }
             }
