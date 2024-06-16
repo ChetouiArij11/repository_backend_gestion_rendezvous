@@ -11,7 +11,6 @@ pipeline {
         stage('Install Node.js and npm') {
             steps {
                 script {
-                    //mise a jour
                     def nodejs = tool name: 'NODEJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
                     env.PATH = "${nodejs}/bin;${env.PATH}"
                 }
