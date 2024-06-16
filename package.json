@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
-    "start": "npm start",
+    "start": "node app.js",
     "sonarqube": "sonar-scanner"
   },
   "author": "",

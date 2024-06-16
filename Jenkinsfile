@@ -77,11 +77,25 @@ pipeline {
                     kubectl config use-context docker-desktop
                     kubectl cluster-info
                     kubectl get nodes
+                    kubectl delete deployment backend-deployment  -n gestion-rendezvous
+                    kubectl delete deployment mysql-deployment -n gestion-rendezvous
+                    kubectl delete  svc backend-service  -n gestion-rendezvous
+                    kubectl delete  svc mysql-service  -n gestion-rendezvous
                     kubectl get namespace gestion-rendezvous || kubectl create namespace gestion-rendezvous
                     kubectl apply -f db/configMap.yml -n gestion-rendezvous
                     kubectl apply -f db/mysqldep.yml -n gestion-rendezvous
                     kubectl apply -f db/persistant.yml -n gestion-rendezvous
                     kubectl apply -f deployment.yaml -n gestion-rendezvous
+                    '''
+                }
+            }
+        }
+        stage('Monitoring') {
+            steps {
+                script {
+                    bat '''
+                    cd monotoring
+                    docker-compose up
                     '''
                 }
             }
