@@ -58,6 +58,17 @@ pipeline {
                 }
             }
         }
+
+        // stage('Deploy with docker-compose ') {
+        //     steps {
+        //         script {
+        
+        //             bat "docker-compose up"
+        //         }
+        //     }
+        // }
+
+
         stage('Deploy with kubectl') {
             steps {
                 script {
